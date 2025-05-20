@@ -16,7 +16,7 @@ background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, F
 
 
 .container{
-   background-color: #013699;
+   background-color: #0001015e;
    border-radius: 8px;
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
    padding: 20px;
@@ -58,7 +58,7 @@ h1{
     display: flex;
     gap: 10px;
     justify-content: center;
-      
+    padding: 30px
 }
 
 #botonesD{
@@ -66,6 +66,7 @@ h1{
         height: 20px;
         color: #000000;
         border-radius: 2px;
+        padding: 6px;
 }
 
     
