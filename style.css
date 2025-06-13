@@ -1,12 +1,9 @@
 body{
     margin: 0%;
     padding: 0%;
-  background: #0575E6;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
+     background: #0575E6; 
+    background: -webkit-linear-gradient(to right, #021B79, #0575E6); 
+    background: linear-gradient(to right, #021B79, #0575E6);
     font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
@@ -18,7 +15,7 @@ background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, F
 .container{
    background-color: #0001015e;
    border-radius: 8px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 4px 8px rgb(0, 0, 0);
    padding: 20px;
    width: 600px;
    height: 400px;
@@ -31,17 +28,9 @@ h1{
     text-align: center;
 }
 
-.add-task{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 4px;
-}
 
-.tareas{
-    list-style: none;
-    padding: 0  ;
-}
+
+
 
 li{
     display: flex;
@@ -75,23 +64,9 @@ input[type="text"]{
     border-radius: 5px;
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.834);
+    margin-right: 4px
 }
 
-.botonesD{
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    padding: 30px
-}
-
-#botonesD{
-      background-color: aliceblue;
-        height: 20px;
-        color: #000000;
-        border-radius: 2px;
-        padding: 6px;
-}
- 
 
  #Angel{
     text-decoration: none;

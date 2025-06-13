@@ -25,10 +25,18 @@ function addTask() {
          nuevaTarea.remove();
      };
 
+     //crar boton de verificar
+     let botonVerificar = document.createElement("button");
+     botonVerificar.textContent = "Verificar";
+     botonVerificar.onclick = function() {
+         
+     };
+
      //crear boton de editar
      let botonEditar = document.createElement("button");
      botonEditar.textContent = "Editar";
      botonEditar.onclick = function() {
+        
         
            let nuevoTexto = prompt("Editar tarea:".trim()); // Usamos trim() para eliminar espacios en blanco al inicio y al final del texto
                if (nuevoTexto !== null && nuevoTexto.trim() !== "") {  
@@ -39,15 +47,20 @@ function addTask() {
                     // Volver a agregar los botones después de editar
                     nuevaTarea.appendChild(botonEliminar);
                     nuevaTarea.appendChild(botonEditar);
+                    nuevaTarea.appendChild(botonVerificar);
             }   }      
+     
+  
 
      //agregar boton de eliminar
      nuevaTarea.appendChild(botonEliminar);
 
      //agregar boton de editar
      nuevaTarea.appendChild(botonEditar);
+
      //agregar boton de verificar
-     let botonVerificar = document.createElement("button");
+     nuevaTarea.appendChild(botonVerificar);
+     
 
 
      //agregar la nueva tarea a la lista
