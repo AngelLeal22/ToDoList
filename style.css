@@ -31,7 +31,7 @@ h1{
     text-align: center;
 }
 
-.botones{
+.add-task{
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -43,7 +43,7 @@ h1{
     padding: 0  ;
 }
 
-.tarea{
+li{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,8 +51,31 @@ h1{
     padding: 10px;
     border-radius: 5px;
     background-color: #fff;
+    
 }
-   
+
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+button{
+    background-color: #5d5c5c;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.834);
+}
+
+input[type="text"]{
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.834);
+}
 
 .botonesD{
     display: flex;
@@ -68,19 +91,29 @@ h1{
         border-radius: 2px;
         padding: 6px;
 }
- .ela{
-    color: #fff;
-    display: flex;
-        flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    text-decoration: none;
-    
- }
+ 
 
  #Angel{
     text-decoration: none;
+    color: #ffffff;
  }
+
+ .footer {
+   
+    color: #ffffff;
+    
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+#github{
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 196px;
+}
+  
+
 
  #png{
     position: absolute;
