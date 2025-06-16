@@ -76,16 +76,15 @@ input[type="text"]{
  .footer {
    
     color: #ffffff;
-    
-    padding: 10px;
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    width: 100%;
+    
 }
 #github{
     position: absolute;
-    margin-top: -42px;
-    margin-left: 196px;
+  
+    margin-left: -5px;
+    margin-top: -19px;
 }
   
 
