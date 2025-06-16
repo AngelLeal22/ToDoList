@@ -29,6 +29,7 @@ function addTask() {
      let botonVerificar = document.createElement("button");
      botonVerificar.textContent = "Verificar";
      botonVerificar.onclick = function() {
+    
          
      };
 
