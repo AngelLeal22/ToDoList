@@ -9,9 +9,8 @@ function addTask() {
         alert("Por favor, ingresa una tarea.");
         return;
      }
-        
 
-    //crear elemento en la lista
+     //crear elemento en la lista
     
     let nuevaTarea = document.createElement("li");
 
@@ -29,6 +28,11 @@ function addTask() {
      let botonVerificar = document.createElement("button");
      botonVerificar.textContent = "Verificar";
      botonVerificar.onclick = function() {
+            if (nuevaTarea.style.textDecoration === "line-through") {
+                nuevaTarea.style.textDecoration = "none"; // Si ya está verificada, quitar el subrayado
+            } else {
+                nuevaTarea.style.textDecoration = "line-through"; // Si no está verificada, agregar el subrayado
+            }
     
          
      };
@@ -70,4 +74,18 @@ function addTask() {
 
      //limpiar el campo de entrada de la tarea
      document.getElementById("nuevaTarea").value = "";
+
+    
 }
+// Función para renderizar las tareas almacenadas en localStorage
+function rendertareas(){
+  let tarea = JSON.parse(localStorage.getItem("tareas")) || [];
+  
+  
+
+}
+
+renderTasks();
+ 
+     
+
