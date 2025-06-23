@@ -64,4 +64,11 @@ function addTask() {
 
   //limpiar el campo de entrada de la tarea
   document.getElementById("nuevaTarea").value = "";
+
+   // Verificar si hay más de 5 tareas
+  const tareas = document.querySelectorAll("li");
+  if (tareas.length > 5) {
+    alert("Has alcanzado el límite de 5 tareas. Por favor, completa o elimina algunas antes de agregar más.");
+    return;
+  }
 }
