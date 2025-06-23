@@ -67,8 +67,16 @@ function addTask() {
 
    // Verificar si hay más de 5 tareas
   const tareas = document.querySelectorAll("li");
-  if (tareas.length > 5) {
-    alert("Has alcanzado el límite de 5 tareas. Por favor, completa o elimina algunas antes de agregar más.");
+  if (tareas.length > 4) {
+    alert("Has alcanzado el límite de 4 tareas. Por favor, completa o elimina algunas antes de agregar más.");
     return;
   }
+
+  // Función para guardar una tarea en localStorage
+    function guardarTarea(tarea) {
+      let tareas = localStorage.getItem("nuevaTarea") ? JSON.parse(localStorage.getItem("tareas")) : [];
+      tareas.push(tarea);
+      localStorage.setItem("nuevaTarea", JSON.stringify(tareas));
+    }
 }
+
