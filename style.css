@@ -1,9 +1,9 @@
 body{
     margin: 0%;
     padding: 0%;
-     background: #0575E6; 
-    background: -webkit-linear-gradient(to right, #021B79, #0575E6); 
-    background: linear-gradient(to right, #021B79, #0575E6);
+     background: #02478b; 
+    background: -webkit-linear-gradient(to right, #021B79, #0456a8); 
+    background: linear-gradient(to right, #021B79, #054d96);
     font-family: Arial, sans-serif;
     height: 100vh;
     display: flex;
@@ -26,6 +26,8 @@ body{
 h1{
     color: #fff;
     text-align: center;
+    
+    
 }
 
 

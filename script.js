@@ -8,75 +8,142 @@ function addTask() {
     return;
   }
 
-  //crear elemento en la lista
-
-  let nuevaTarea = document.createElement("li");
-
-  //con textContent obtenemos el texto de la tarea
-  nuevaTarea.textContent = nuevaTareaTexto + " "; // Agregar un espacio al final para el botón y no quede pegado del texto
-
-  //crear botón de eliminar
-  let botonEliminar = document.createElement("button");
-  botonEliminar.textContent = "Eliminar";
-  botonEliminar.onclick = function () {
-    nuevaTarea.remove();
-  };
-
-  //crear boton de verificar
-  let botonVerificar = document.createElement("button");
-  botonVerificar.textContent = "Verificar";
-  botonVerificar.onclick = function () {
-    if (nuevaTarea.style.textDecoration === "line-through") {
-      nuevaTarea.style.textDecoration = "none"; // Si ya está verificada, quitar el subrayado
-    } else {
-      nuevaTarea.style.textDecoration = "line-through"; // Si no está verificada, agregar el subrayado
-    }
-  };
-
-  //crear boton de editar
-  let botonEditar = document.createElement("button");
-  botonEditar.textContent = "Editar";
-  botonEditar.onclick = function () {
-    let nuevoTexto = prompt("Editar tarea:".trim()); // Usamos trim() para eliminar espacios en blanco al inicio y al final del texto
-    if (nuevoTexto !== null && nuevoTexto.trim() !== "") {
-      //prompt() es una función integrada que muestra una ventana emergente al usuario para solicitarle que ingrese texto
-      // !== es un operador de comparación que verifica si los valores son diferentes y no son null
-      // recreamos la validación para el nuevo texto, null es cuando el usuario presiona cancelar
-      nuevaTarea.textContent = nuevoTexto + " "; // Actualizar el texto de la tarea
-      // Volver a agregar los botones después de editar
-      nuevaTarea.appendChild(botonEliminar);
-      nuevaTarea.appendChild(botonEditar);
-      nuevaTarea.appendChild(botonVerificar);
-    }
-  };
-
-  //agregar boton de eliminar
-  nuevaTarea.appendChild(botonEliminar);
-
-  //agregar boton de editar
-  nuevaTarea.appendChild(botonEditar);
-
-  //agregar boton de verificar
-  nuevaTarea.appendChild(botonVerificar);
-
-  //agregar la nueva tarea a la lista
-  document.getElementById("list-container").appendChild(nuevaTarea);
-
-  //limpiar el campo de entrada de la tarea
-  document.getElementById("nuevaTarea").value = "";
-
-   // Verificar si hay más de 5 tareas
-  const tareas = document.querySelectorAll("li");
-  if (tareas.length > 4) {
+  // Verificar límite de tareas (4 como máximo)
+  const tareas = document.querySelectorAll("#list-container li");
+  if (tareas.length >= 4) {
     alert("Has alcanzado el límite de 4 tareas. Por favor, completa o elimina algunas antes de agregar más.");
     return;
   }
 
-  // Función para guardar una tarea en localStorage
-    function guardarTarea(tarea) {
-      let tareas = localStorage.getItem("nuevaTarea") ? JSON.parse(localStorage.getItem("tareas")) : [];
-      tareas.push(tarea);
-      localStorage.setItem("nuevaTarea", JSON.stringify(tareas));
+  // Crear elemento en la lista
+  let nuevaTarea = document.createElement("li");
+  let spanTarea = document.createElement("span"); // Usamos un span para el texto
+  spanTarea.textContent = nuevaTareaTexto;
+  nuevaTarea.appendChild(spanTarea);
+
+  // Crear botón de eliminar
+  let botonEliminar = document.createElement("button");
+  botonEliminar.textContent = "Eliminar";
+  botonEliminar.onclick = function() {
+    nuevaTarea.remove();
+    saveTasks(); // Guardar cambios al eliminar
+  };
+
+  // Crear botón de verificar
+  let botonVerificar = document.createElement("button");
+  botonVerificar.textContent = "Verificar";
+  botonVerificar.onclick = function() {
+    spanTarea.style.textDecoration = spanTarea.style.textDecoration === "line-through" ? "none" : "line-through";
+    saveTasks(); // Guardar cambios al verificar
+  };
+
+  // Crear botón de editar
+  let botonEditar = document.createElement("button");
+  botonEditar.textContent = "Editar";
+  botonEditar.onclick = function() {
+    let nuevoTexto = prompt("Editar tarea:", spanTarea.textContent.trim());
+    if (nuevoTexto !== null && nuevoTexto.trim() !== "") {
+      spanTarea.textContent = nuevoTexto.trim();
+      saveTasks(); // Guardar cambios al editar
     }
+  };
+
+  // Agregar botones
+  nuevaTarea.appendChild(botonVerificar);
+  nuevaTarea.appendChild(botonEditar);
+  nuevaTarea.appendChild(botonEliminar);
+
+  // Agregar la nueva tarea a la lista
+  document.getElementById("list-container").appendChild(nuevaTarea);
+
+  // Limpiar el campo de entrada
+  document.getElementById("nuevaTarea").value = "";
+
+  // Guardar las tareas en LocalStorage
+  saveTasks();
 }
+
+// Función para guardar todas las tareas en LocalStorage
+function saveTasks() {
+  const tareas = [];
+  const elementosTareas = document.querySelectorAll("#list-container li");
+  
+  elementosTareas.forEach(function(tarea) {
+    const span = tarea.querySelector("span");
+    tareas.push({
+      text: span.textContent,
+      completed: span.classList.contains("completed")
+    });
+  });
+  
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+// Función para cargar tareas al iniciar la página
+function loadTasks() {
+  const tareasGuardadas = localStorage.getItem("tareas");
+  if (tareasGuardadas) {
+    const tareas = JSON.parse(tareasGuardadas);
+    
+    tareas.forEach(function(tarea) {
+      // Crear elementos (similar a addTask pero sin la validación de límite)
+      let nuevaTarea = document.createElement("li");
+      let spanTarea = document.createElement("span");
+      spanTarea.textContent = tarea.text;
+      if (tarea.completed) {
+        spanTarea.classList.add("completed");
+      }
+      
+      // Crear botones (igual que en addTask)
+      let botonEliminar = document.createElement("button");
+      botonEliminar.textContent = "Eliminar";
+      botonEliminar.onclick = function() {
+        nuevaTarea.remove();
+        saveTasks();
+      };
+      
+      let botonVerificar = document.createElement("button");
+      botonVerificar.textContent = "Verificar";
+      botonVerificar.onclick = function() {
+        spanTarea.classList.toggle("completed");
+        saveTasks();
+      };
+      
+      let botonEditar = document.createElement("button");
+      botonEditar.textContent = "Editar";
+      botonEditar.onclick = function() {
+        let nuevoTexto = prompt("Editar tarea:", spanTarea.textContent);
+        if (nuevoTexto !== null && nuevoTexto.trim() !== "") {
+          spanTarea.textContent = nuevoTexto.trim();
+          saveTasks();
+        }
+      };
+      
+      // Construir la tarea
+      nuevaTarea.appendChild(spanTarea);
+      nuevaTarea.appendChild(botonVerificar);
+      nuevaTarea.appendChild(botonEditar);
+      nuevaTarea.appendChild(botonEliminar);
+      
+      // Agregar a la lista
+      document.getElementById("list-container").appendChild(nuevaTarea);
+    });
+  }
+}
+
+// Al cargar la página, cargar las tareas guardadas
+document.addEventListener("DOMContentLoaded", function() {
+  loadTasks();
+  
+  // Agregar evento para Enter en el input
+  document.getElementById("nuevaTarea").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  });
+});
+  //funcion local storage
+
+    
+
 
