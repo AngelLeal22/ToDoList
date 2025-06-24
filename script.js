@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
-  //funcion local storage
+
 
     
 
